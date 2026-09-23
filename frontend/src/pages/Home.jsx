@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { API_URL } from "../api";
 import TaskForm from "../components/TaskForm";
 import TaskItem from "../components/TaskItem";
 
@@ -8,7 +9,7 @@ const Home = () => {
 
   const fetchTasks = async () => {
     try {
-      const response = await fetch("http://localhost:4000/api/tasks");
+      const response = await fetch(`${API_URL}/api/tasks`);
       const data = await response.json();
       setTasks(data);
     } catch (error) {
@@ -31,7 +32,7 @@ const Home = () => {
   // Toggle Complete / Incomplete
   const handleToggle = async (id, currentStatus) => {
     try {
-      const response = await fetch(`http://localhost:4000/api/tasks/${id}`, {
+      const response = await fetch(`${API_URL}/api/tasks/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ isCompleted: !currentStatus }),
@@ -49,7 +50,8 @@ const Home = () => {
     // Edit Task (Title, Priority, etc.)
   const handleEdit = async (id, updatedFields) => {
     try {
-      const response = await fetch(`http://localhost:4000/api/tasks/${id}`, {
+        
+      const response = await fetch(`${API_URL}/api/tasks/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedFields),
@@ -66,7 +68,7 @@ const Home = () => {
   // Delete Task
   const handleDelete = async (id) => {
     try {
-      await fetch(`http://localhost:4000/api/tasks/${id}`, {
+      await fetch(`${API_URL}/api/tasks/${id}`, {
         method: "DELETE",
       });
 

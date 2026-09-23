@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { API_URL } from "../api";
 const TaskForm = ({ onTaskAdded }) => {
   const [title, setTitle] = useState("");
   const [priority, setPriority] = useState("Medium");
@@ -13,7 +13,7 @@ const TaskForm = ({ onTaskAdded }) => {
 
     try {
       // Send POST request
-      const response = await fetch("http://localhost:4000/api/tasks", {
+      const response = await fetch(`${API_URL}/api/tasks`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title, priority }),
